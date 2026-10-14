@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>테슬라 이벤트 | 테슬라찬</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<script>
+/* =====================================================================
+   이벤트 목록 — 여기만 수정하면 됩니다!
+   - start: 반드시 시간대 포함 ISO 형식 (예: "2026-10-22T06:30:00+09:00" = 한국 시간)
+   - tag: "earnings" (실적 발표, 파란색) 또는 "event" (이벤트, 회색)
+   - durationMin: 시작 후 '진행 중'으로 표시할 시간(분). 이후 '종료' → 지난 이벤트로 이동
+   - tentative: true 이면 '시간 미확정' 표시
+   - article: 관련 기사 { title, url, emoji, source }
+   ===================================================================== */
+const EVENTS = [
+  {
+    title: "2026년 3분기 실적 발표 (Q3 Earnings Call)",
+    start: "2026-10-22T06:30:00+09:00", // 미국 10/21(수) 4:30pm CT / 5:30pm ET
+    tag: "earnings",
+    durationMin: 90,
+    tentative: false,
+    article: {
+      title: "테슬라, 2026년 3분기 생산·인도 실적 발표 및 실적 발표일 공지",
+      url: "https://www.nasdaq.com/press-release/tesla-third-quarter-2026-production-deliveries-deployments-2026-10-02",
+      emoji: "📈", source: "Nasdaq (테슬라 공식 보도자료)"
+    }
+  },
+  {
+    title: "테슬라 로드스터 공개 이벤트 (일정 변경)",
+    start: "2026-10-16T09:55:00+09:00", // 미국 10/15(목) 7:55pm CT
+    tag: "event",
+    durationMin: 120,
+    tentative: false,
+    article: {
+      title: "테슬라, 9년 지연 끝에 이번 목요일 로드스터 이벤트 확정",
+      url: "https://electrek.co/2026/10/13/tesla-roadster-event-thursday-nine-years-delays/",
+      emoji: "🏎️", source: "Electrek"
+    }
+  },
+];
+</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Pretendard","Noto Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#fff;color:#222;padding:28px 16px 40px}
+.wrap{max-width:960px;margin:0 auto}
+h1{font-size:34px;font-weight:800;color:#333}
+.sub{margin:8px 0 22px;font-size:18px;color:#444}
+h2{font-size:22px;margin:30px 0 12px;color:#555}
+.list{background:#f3f4f7;border:1px solid #e3e5ea;border-radius:14px;overflow:hidden}
+.card{display:flex;gap:28px;padding:26px 30px;border-bottom:1px solid #e1e3e8;position:relative}
+.card:last-child{border-bottom:0}
+.date{width:84px;flex:none;text-align:center;border-right:1px solid #d6d8de;padding-right:20px;color:#444;align-self:flex-start}
+.date .m{font-size:20px;font-weight:700}.date .d{white-space:nowrap;font-size:40px;font-weight:800;line-height:1.2}
+.body{flex:1;min-width:0;max-width:600px}
+.title{font-size:23px;font-weight:700;color:#333;padding-right:110px;margin-bottom:14px}
+.tag{position:absolute;right:30px;top:26px;font-size:13px;font-weight:700;color:#fff;border-radius:999px;padding:6px 14px}
+.tag.earnings{background:#4f5bd5}.tag.event{background:#6b7280}
+.cd{background:#0b0b0d;color:#fff;border-radius:8px;display:flex;justify-content:center;gap:clamp(18px,6vw,60px);padding:18px 10px}
+.cd div{text-align:center;min-width:48px}.cd b{display:block;font-size:44px;font-weight:800;font-variant-numeric:tabular-nums}
+.cd span{font-size:14px;color:#ddd}
+.cd.state{font-size:26px;font-weight:800;padding:28px 10px}
+.cap{font-size:14px;color:#888;margin:10px 0 4px}.kst{font-size:15px;font-weight:600;color:#444}
+.tent{font-size:12px;color:#c2410c;margin-left:6px}
+.art{display:flex;gap:16px;align-items:center;background:#fff;border:1px solid #e3e5ea;border-radius:12px;padding:12px;margin-top:16px;text-decoration:none;color:#333}
+.art:hover{border-color:#aab}
+.thumb{width:200px;height:112px;flex:none;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:40px;color:#fff}
+.thumb small{font-size:12px;font-weight:700;letter-spacing:2px;margin-top:4px;opacity:.9}
+.earnings-bg{background:linear-gradient(135deg,#1e3a8a,#4f5bd5 60%,#93c5fd)}
+.event-bg{background:linear-gradient(135deg,#0a0a0a,#3f3f46 60%,#b91c1c)}
+.art h3{font-size:18px;font-weight:700;line-height:1.4}.art p{font-size:12px;color:#888;margin-top:4px}
+.past .card{opacity:.65}
+footer{margin-top:30px;text-align:center;font-size:13px;color:#999}
+@media(max-width:600px){
+ body{padding:20px 12px}h1{font-size:28px}.sub{font-size:15px}
+ .card{gap:14px;padding:20px 14px}.date{width:52px;padding-right:12px}.date .m{font-size:16px}.date .d{font-size:30px}
+ .title{font-size:18px;padding-right:0;margin-top:30px}.tag{right:14px;top:18px}
+ .cd b{font-size:30px}.cd span{font-size:12px}.cd div{min-width:36px}
+ .art{flex-direction:column;align-items:stretch}.thumb{width:100%;height:100px}.art h3{font-size:16px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>테슬라 이벤트</h1>
+  <p class="sub">테슬라의 다가오는 이벤트와 지난 이벤트를 한눈에</p>
+  <div id="upcoming" class="list"></div>
+  <div id="pastWrap" hidden><h2>지난 이벤트</h2><div id="past" class="list past"></div></div>
+  <footer>만든이: 테슬라찬 (Tslachan) · youtube.com/@Tslachan</footer>
+</div>
+<script>
+const TZ="Asia/Seoul";
+const fmt=(d,o)=>new Intl.DateTimeFormat("ko-KR",{timeZone:TZ,...o}).format(d);
+const kstLabel=d=>{const p=Object.fromEntries(new Intl.DateTimeFormat("ko-KR",{timeZone:TZ,month:"numeric",day:"numeric",weekday:"short",hour:"numeric",minute:"2-digit",hour12:true}).formatToParts(d).map(x=>[x.type,x.value]));
+  return `${p.month}월 ${p.day}일(${p.weekday}) ${p.dayPeriod} ${p.hour}:${p.minute} KST`;};
+const TAGS={earnings:"실적 발표",event:"이벤트"};
+const items=EVENTS.map(e=>({...e,t:new Date(e.start)}));
+function card(e,i){
+  return `<div class="card">
+  <div class="date"><div class="m">${fmt(e.t,{month:"numeric"}).replace(/\D/g,"")}월</div><div class="d">${fmt(e.t,{day:"numeric"}).replace(/\D/g,"")}<small style="font-size:.5em">일</small></div></div>
+  <div class="body">
+    <div class="title">${e.title}</div><span class="tag ${e.tag}">${TAGS[e.tag]||e.tag}</span>
+    <div class="cd" id="cd${i}"></div>
+    <p class="cap">이벤트 시작까지 남은 시간 (한국 시간 기준)</p>
+    <p class="kst">🕒 ${kstLabel(e.t)}${e.tentative?'<span class="tent">시간 미확정</span>':''}</p>
+    ${e.article?`<a class="art" href="${e.article.url}" target="_blank" rel="noopener">
+      <div class="thumb ${e.tag}-bg">${e.article.emoji||"⚡"}<small>TESLA</small></div>
+      <div><h3>${e.article.title}</h3><p>${e.article.source||""}</p></div></a>`:""}
+  </div></div>`;}
+let layoutKey="";
+function tick(){
+  const now=Date.now();
+  items.forEach(e=>{e.end=e.t.getTime()+(e.durationMin||60)*60000;e.isPast=now>=e.end;});
+  const up=items.filter(e=>!e.isPast).sort((a,b)=>a.t-b.t), past=items.filter(e=>e.isPast).sort((a,b)=>b.t-a.t);
+  const key=up.map(e=>e.start).join()+"|"+past.length;
+  if(key!==layoutKey){layoutKey=key;
+    document.getElementById("upcoming").innerHTML=up.length?up.map(e=>card(e,items.indexOf(e))).join(""):'<div class="card">예정된 이벤트가 없습니다.</div>';
+    document.getElementById("past").innerHTML=past.map(e=>card(e,items.indexOf(e))).join("");
+    document.getElementById("pastWrap").hidden=!past.length;}
+  items.forEach((e,i)=>{const el=document.getElementById("cd"+i);if(!el)return;
+    const diff=e.t-now;
+    if(e.isPast){el.className="cd state";el.textContent="종료";return;}
+    if(diff<=0){el.className="cd state";el.textContent="🔴 진행 중";return;}
+    el.className="cd";const s=Math.floor(diff/1000);
+    const v=[[Math.floor(s/86400),"일"],[Math.floor(s%86400/3600),"시간"],[Math.floor(s%3600/60),"분"],[s%60,"초"]];
+    el.innerHTML=v.map(([n,l])=>`<div><b>${n}</b><span>${l}</span></div>`).join("");});
+}
+tick();setInterval(tick,1000);
+</script>
+</body>
+</html>
