@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>테슬라 이벤트 | 테슬라찬</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script>
 /* =====================================================================
    이벤트 목록 — 여기만 수정하면 됩니다!
@@ -42,52 +43,69 @@ const EVENTS = [
 ];
 </script>
 <style>
+:root{--accent:#2563eb;--accent-soft:#eaf1ff;--ink:#111827;--muted:#6b7280;--bg:#f5f7fb}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"Pretendard","Noto Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#fff;color:#222;padding:28px 16px 40px}
-.wrap{max-width:960px;margin:0 auto}
-h1{font-size:34px;font-weight:800;color:#333}
-.sub{margin:8px 0 22px;font-size:18px;color:#444}
-h2{font-size:22px;margin:30px 0 12px;color:#555}
-.list{background:#f3f4f7;border:1px solid #e3e5ea;border-radius:14px;overflow:hidden}
-.card{display:flex;gap:28px;padding:26px 30px;border-bottom:1px solid #e1e3e8;position:relative}
-.card:last-child{border-bottom:0}
-.date{width:84px;flex:none;text-align:center;border-right:1px solid #d6d8de;padding-right:20px;color:#444;align-self:flex-start}
-.date .m{font-size:20px;font-weight:700}.date .d{white-space:nowrap;font-size:40px;font-weight:800;line-height:1.2}
-.body{flex:1;min-width:0;max-width:600px}
-.title{font-size:23px;font-weight:700;color:#333;padding-right:110px;margin-bottom:14px}
-.tag{position:absolute;right:30px;top:26px;font-size:13px;font-weight:700;color:#fff;border-radius:999px;padding:6px 14px}
-.tag.earnings{background:#4f5bd5}.tag.event{background:#6b7280}
-.cd{background:#0b0b0d;color:#fff;border-radius:8px;display:flex;justify-content:center;gap:clamp(18px,6vw,60px);padding:18px 10px}
-.cd div{text-align:center;min-width:48px}.cd b{display:block;font-size:44px;font-weight:800;font-variant-numeric:tabular-nums}
-.cd span{font-size:14px;color:#ddd}
-.cd.state{font-size:26px;font-weight:800;padding:28px 10px}
-.cap{font-size:14px;color:#888;margin:10px 0 4px}.kst{font-size:15px;font-weight:600;color:#444}
+body{font-family:"Noto Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--bg);color:var(--ink)}
+.top{background:#fff;border-bottom:1px solid #e5e7eb}
+.top .in{max-width:880px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px;letter-spacing:-.5px}
+.logo i{width:34px;height:34px;border-radius:10px;background:var(--accent);color:#fff;display:grid;place-items:center;font-style:normal;font-size:18px}
+.logo em{font-style:normal;color:var(--accent)}
+.yt{font-size:13px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:7px 14px;border-radius:999px;text-decoration:none;white-space:nowrap}
+.wrap{max-width:880px;margin:0 auto;padding:30px 20px 40px}
+.hero{margin-bottom:24px}
+.hero .kicker{display:inline-block;font-size:12px;font-weight:700;color:var(--accent);letter-spacing:1px;margin-bottom:6px}
+h1{font-size:30px;font-weight:900;letter-spacing:-1px}
+.sub{margin-top:6px;font-size:16px;color:var(--muted)}
+h2{font-size:18px;font-weight:700;margin:34px 0 14px;color:var(--muted)}
+.list{display:grid;gap:20px}
+.card{background:#fff;border-radius:20px;box-shadow:0 6px 24px rgba(17,24,39,.07);padding:24px;display:grid;grid-template-columns:auto 1fr;gap:20px;position:relative;border-top:4px solid var(--accent)}
+.card.ev-event{border-top-color:#e11d48}
+.date{width:72px;height:80px;border-radius:16px;background:var(--accent-soft);color:var(--accent);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ev-event .date{background:#ffe8ee;color:#e11d48}
+.date .m{font-size:13px;font-weight:700}.date .d{font-size:32px;font-weight:900;line-height:1.1;white-space:nowrap}
+.body{min-width:0}
+.tag{display:inline-block;font-size:12px;font-weight:700;border-radius:6px;padding:3px 10px;margin-bottom:8px;background:var(--accent-soft);color:var(--accent)}
+.tag.event{background:#ffe8ee;color:#e11d48}
+.title{font-size:20px;font-weight:700;line-height:1.4;margin-bottom:16px}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.cd div{background:var(--bg);border:1px solid #e5e7eb;border-radius:14px;padding:12px 4px;text-align:center}
+.cd b{display:block;font-size:34px;font-weight:900;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.1}
+.cd span{font-size:12px;color:var(--muted);font-weight:500}
+.cd.state{display:block;text-align:center;background:var(--accent-soft);color:var(--accent);border-radius:14px;font-size:22px;font-weight:900;padding:20px}
+.cap{font-size:13px;color:var(--muted);margin:12px 0 2px}.kst{font-size:15px;font-weight:700}
 .tent{font-size:12px;color:#c2410c;margin-left:6px}
-.art{display:flex;gap:16px;align-items:center;background:#fff;border:1px solid #e3e5ea;border-radius:12px;padding:12px;margin-top:16px;text-decoration:none;color:#333}
-.art:hover{border-color:#aab}
-.thumb{width:200px;height:112px;flex:none;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:40px;color:#fff}
-.thumb small{font-size:12px;font-weight:700;letter-spacing:2px;margin-top:4px;opacity:.9}
-.earnings-bg{background:linear-gradient(135deg,#1e3a8a,#4f5bd5 60%,#93c5fd)}
-.event-bg{background:linear-gradient(135deg,#0a0a0a,#3f3f46 60%,#b91c1c)}
-.art h3{font-size:18px;font-weight:700;line-height:1.4}.art p{font-size:12px;color:#888;margin-top:4px}
-.past .card{opacity:.65}
-footer{margin-top:30px;text-align:center;font-size:13px;color:#999}
+.art{display:flex;gap:14px;align-items:center;border:1px solid #e5e7eb;border-radius:14px;padding:10px;margin-top:16px;text-decoration:none;color:var(--ink);transition:.15s}
+.art:hover{border-color:var(--accent);background:#fafcff}
+.thumb{width:64px;height:64px;flex:none;border-radius:12px;display:grid;place-items:center;font-size:30px;background:var(--accent-soft)}
+.thumb small{display:none}
+.event-bg{background:#ffe8ee}
+.art h3{font-size:15px;font-weight:700;line-height:1.45}.art p{font-size:12px;color:var(--muted);margin-top:3px}
+.past .card{opacity:.6;border-top-color:#9ca3af}
+footer{margin-top:36px;text-align:center;font-size:13px;color:var(--muted)}
+footer a{color:var(--accent);font-weight:700;text-decoration:none}
 @media(max-width:600px){
- body{padding:20px 12px}h1{font-size:28px}.sub{font-size:15px}
- .card{gap:14px;padding:20px 14px}.date{width:52px;padding-right:12px}.date .m{font-size:16px}.date .d{font-size:30px}
- .title{font-size:18px;padding-right:0;margin-top:30px}.tag{right:14px;top:18px}
- .cd b{font-size:30px}.cd span{font-size:12px}.cd div{min-width:36px}
- .art{flex-direction:column;align-items:stretch}.thumb{width:100%;height:100px}.art h3{font-size:16px}
+ .top .in{padding:12px 14px}.logo{font-size:17px}.yt{font-size:12px;padding:6px 10px}
+ .wrap{padding:22px 14px}h1{font-size:25px}.sub{font-size:14px}
+ .card{grid-template-columns:1fr;padding:18px;gap:12px}
+ .date{flex-direction:row;width:auto;height:auto;gap:6px;padding:6px 12px;justify-self:start;border-radius:10px}
+ .date .d{font-size:18px}.title{font-size:17px}
+ .cd{gap:6px}.cd b{font-size:24px}.cd span{font-size:11px}
 }
 </style>
 </head>
 <body>
+<header class="top"><div class="in">
+  <div class="logo"><i>⚡</i>테슬라찬 <em>Tslachan</em></div>
+  <a class="yt" href="https://www.youtube.com/@Tslachan" target="_blank" rel="noopener">▶ YouTube @Tslachan</a>
+</div></header>
 <div class="wrap">
+  <div class="hero"><span class="kicker">TSLACHAN COUNTDOWN</span>
   <h1>테슬라 이벤트</h1>
-  <p class="sub">테슬라의 다가오는 이벤트와 지난 이벤트를 한눈에</p>
+  <p class="sub">테슬라의 다가오는 이벤트와 지난 이벤트를 한눈에</p></div>
   <div id="upcoming" class="list"></div>
   <div id="pastWrap" hidden><h2>지난 이벤트</h2><div id="past" class="list past"></div></div>
-  <footer>만든이: 테슬라찬 (Tslachan) · youtube.com/@Tslachan</footer>
+  <footer>만든이: 테슬라찬 (Tslachan) · <a href="https://www.youtube.com/@Tslachan" target="_blank" rel="noopener">youtube.com/@Tslachan</a></footer>
 </div>
 <script>
 const TZ="Asia/Seoul";
@@ -97,10 +115,10 @@ const kstLabel=d=>{const p=Object.fromEntries(new Intl.DateTimeFormat("ko-KR",{t
 const TAGS={earnings:"실적 발표",event:"이벤트"};
 const items=EVENTS.map(e=>({...e,t:new Date(e.start)}));
 function card(e,i){
-  return `<div class="card">
+  return `<div class="card ev-${e.tag}">
   <div class="date"><div class="m">${fmt(e.t,{month:"numeric"}).replace(/\D/g,"")}월</div><div class="d">${fmt(e.t,{day:"numeric"}).replace(/\D/g,"")}<small style="font-size:.5em">일</small></div></div>
   <div class="body">
-    <div class="title">${e.title}</div><span class="tag ${e.tag}">${TAGS[e.tag]||e.tag}</span>
+    <span class="tag ${e.tag}">${TAGS[e.tag]||e.tag}</span><div class="title">${e.title}</div>
     <div class="cd" id="cd${i}"></div>
     <p class="cap">이벤트 시작까지 남은 시간 (한국 시간 기준)</p>
     <p class="kst">🕒 ${kstLabel(e.t)}${e.tentative?'<span class="tent">시간 미확정</span>':''}</p>
